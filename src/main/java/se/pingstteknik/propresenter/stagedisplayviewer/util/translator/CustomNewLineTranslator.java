@@ -1,11 +1,11 @@
-package se.pingstteknik.propresenter.stagedisplayviewer.util;
+package se.pingstteknik.propresenter.stagedisplayviewer.util.translator;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CustomNewLineTranslator {
+public class CustomNewLineTranslator implements Translator {
 	private static Pattern NOTES_REGEX = Pattern.compile("(i?)NEWLINE(?-i) (\\d+ ?)+");
 	
 	/**
@@ -15,7 +15,7 @@ public class CustomNewLineTranslator {
 	 * @param notes
 	 * @return
 	 */
-	public static String translate(String message, String notes) {
+	public String transform(String message, String notes) {
 		Matcher m = NOTES_REGEX.matcher(notes);
 		if(m.find()) {
 			String[] args = m.group().split(" ");

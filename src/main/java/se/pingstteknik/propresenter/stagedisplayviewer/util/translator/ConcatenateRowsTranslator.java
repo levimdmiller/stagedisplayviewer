@@ -1,4 +1,4 @@
-package se.pingstteknik.propresenter.stagedisplayviewer.util;
+package se.pingstteknik.propresenter.stagedisplayviewer.util.translator;
 
 import static se.pingstteknik.propresenter.stagedisplayviewer.config.Property.DIVIDER;
 
@@ -7,7 +7,7 @@ import static se.pingstteknik.propresenter.stagedisplayviewer.config.Property.DI
  * @version 1.2.1
  * @since 1.0.0
  */
-public class ConcatenateRowsTranslator {
+public class ConcatenateRowsTranslator implements Translator{
 
     private static final String NEWLINE = "\n";
     private final boolean preserveTwoLines;
@@ -16,7 +16,7 @@ public class ConcatenateRowsTranslator {
         this.preserveTwoLines = preserveTwoLines;
     }
 
-    public String transformSceneText(String currentSlideText) {
+    public String transform(String currentSlideText, String notes) {
         return reconstructTextFromRows(splitString(currentSlideText));
     }
 

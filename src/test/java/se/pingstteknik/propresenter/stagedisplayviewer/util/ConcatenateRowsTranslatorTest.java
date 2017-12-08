@@ -2,6 +2,8 @@ package se.pingstteknik.propresenter.stagedisplayviewer.util;
 
 import org.junit.Test;
 
+import se.pingstteknik.propresenter.stagedisplayviewer.util.translator.ConcatenateRowsTranslator;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 

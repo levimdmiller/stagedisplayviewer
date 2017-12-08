@@ -1,4 +1,4 @@
-package se.pingstteknik.propresenter.stagedisplayviewer.util;
+package se.pingstteknik.propresenter.stagedisplayviewer.util.translator;
 
 /**
  * Removes lines after an empty line
@@ -6,9 +6,9 @@ package se.pingstteknik.propresenter.stagedisplayviewer.util;
  * @version 1.2.0
  * @since 1.2.0
  */
-public class RemoveLinesAfterEmptyLineTranslator {
+public class RemoveLinesAfterEmptyLineTranslator implements Translator{
 
-    public String transform(String message) {
+    public String transform(String message, String notes) {
         return reconstructTextFromRows(splitStringOnLineBreaks(message));
     }
 
