@@ -29,6 +29,7 @@ import se.pingstteknik.propresenter.stagedisplayviewer.util.MidiModule;
 import se.pingstteknik.propresenter.stagedisplayviewer.util.XmlDataReader;
 import se.pingstteknik.propresenter.stagedisplayviewer.util.XmlParser;
 import se.pingstteknik.propresenter.stagedisplayviewer.util.translator.CapitalizeRowsTranslator;
+import se.pingstteknik.propresenter.stagedisplayviewer.util.translator.CapsLockTranslator;
 import se.pingstteknik.propresenter.stagedisplayviewer.util.translator.ConcatenateRowsTranslator;
 import se.pingstteknik.propresenter.stagedisplayviewer.util.translator.CustomNewLineTranslator;
 import se.pingstteknik.propresenter.stagedisplayviewer.util.translator.RemoveLinesAfterEmptyLineTranslator;
@@ -56,7 +57,7 @@ public class LowerKeyHandler implements Runnable {
     private final Translator[] translators;
 
     public LowerKeyHandler(Text lowerKey, MidiModule midiModule) throws IOException {
-    	// Conditionally add transformers in order.
+    	// Conditionally add translators in order.
     	// Saves checking this condition every iteration.
     	// Could probably refactor to use dependency injection.
     	ArrayList<Translator> t = new ArrayList<>();
@@ -67,6 +68,8 @@ public class LowerKeyHandler implements Runnable {
     		t.add(new ConcatenateRowsTranslator(PRESERVE_TWO_LINES.isTrue()));
     	if(Property.CAPITALIZE_LINES.isTrue())
     		t.add(new CapitalizeRowsTranslator());
+    	if(Property.CAPS_LOCK.isTrue())
+    		t.add(new CapsLockTranslator());
     	
     	translators = t.toArray(new Translator[t.size()]);
         this.lowerKey = lowerKey;
