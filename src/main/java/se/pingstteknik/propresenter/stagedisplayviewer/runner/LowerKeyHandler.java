@@ -16,13 +16,10 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import javafx.animation.FadeTransition;
 import javafx.application.Platform;
-import javafx.scene.text.Text;
-import javafx.util.Duration;
 import se.pingstteknik.propresenter.stagedisplayviewer.config.Property;
 import se.pingstteknik.propresenter.stagedisplayviewer.model.StageDisplay;
-import se.pingstteknik.propresenter.stagedisplayviewer.util.FxTextUtils;
+import se.pingstteknik.propresenter.stagedisplayviewer.transition.FadePane;
 import se.pingstteknik.propresenter.stagedisplayviewer.util.Logger;
 import se.pingstteknik.propresenter.stagedisplayviewer.util.LoggerFactory;
 import se.pingstteknik.propresenter.stagedisplayviewer.util.MidiModule;
@@ -41,9 +38,7 @@ import se.pingstteknik.propresenter.stagedisplayviewer.util.translator.Translato
  * @since 1.0.0
  */
 public class LowerKeyHandler implements Runnable {
-
     private static final Logger log = LoggerFactory.getLogger(LowerKeyHandler.class);
-    private static final FxTextUtils  fxTextUtils = new FxTextUtils();
     private static final XmlDataReader xmlDataReader = new XmlDataReader();
     private static final XmlParser xmlParser = new XmlParser();
     private static final String SUCCESSFUL_LOGIN = "<StageDisplayLoginSuccess />";
@@ -51,12 +46,11 @@ public class LowerKeyHandler implements Runnable {
 
     private volatile boolean running = true;
     private volatile boolean activeConnection = true;
-    private final Text lowerKey;
+    private final FadePane lowerKey;
     private final MidiModule midiModule;
-    private final FadeTransition fadeOut, fadeIn;
     private final Translator[] translators;
 
-    public LowerKeyHandler(Text lowerKey, MidiModule midiModule) throws IOException {
+    public LowerKeyHandler(FadePane lowerKey, MidiModule midiModule) throws IOException {
     	// Conditionally add translators in order.
     	// Saves checking this condition every iteration.
     	// Could probably refactor to use dependency injection.
@@ -74,15 +68,6 @@ public class LowerKeyHandler implements Runnable {
     	translators = t.toArray(new Translator[t.size()]);
         this.lowerKey = lowerKey;
         this.midiModule = midiModule;
-        
-        // Initialize fade animations for updating stage display text.
-        fadeOut = new FadeTransition(Duration.millis(Property.FADE_TIME.toInt()), lowerKey);
-        fadeOut.setFromValue(1.0);
-        fadeOut.setToValue(0.0);
-        
-        fadeIn = new FadeTransition(Duration.millis(Property.FADE_TIME.toInt()), lowerKey);
-        fadeIn.setFromValue(0.0);
-        fadeIn.setToValue(1.0);
     }
 
     @Override
@@ -141,22 +126,10 @@ public class LowerKeyHandler implements Runnable {
         log.debug("Slide text unparsed: {}", slideText);
 
         if (!slideText.isEmpty()) {
-        	for(Translator t : translators)
-        		t.transform(slideText, slideNotes);
-            lowerKey.setFont(fxTextUtils.getOptimizedFont(slideText, lowerKey.getWrappingWidth()));
-            
-            // Play the fade out/in animation if the slide text changes.
-            if(!lowerKey.getText().equals(slideText)) {
-	            final String text = slideText; // needs to be final for event handler.
-	            fadeOut.setOnFinished(e -> {
-	                lowerKey.setText(text);
-	                fadeIn.play();
-	            });
-	            fadeOut.play();
-            } else {
-            	// Make sure initial text is displayed.
+        		// Apply all translations.
+        		for(Translator t : translators)
+        			t.transform(slideText, slideNotes);
             	lowerKey.setText(slideText);
-            }
             log.debug("Slide text parsed: {}", slideText);
         } else {
             lowerKey.setText(" ");

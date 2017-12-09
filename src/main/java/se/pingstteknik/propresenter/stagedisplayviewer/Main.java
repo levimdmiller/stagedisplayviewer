@@ -5,12 +5,14 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import se.pingstteknik.propresenter.stagedisplayviewer.config.Property;
 import se.pingstteknik.propresenter.stagedisplayviewer.eventhandler.SceneKeyTypedHandler;
 import se.pingstteknik.propresenter.stagedisplayviewer.runner.LowerKeyHandler;
+import se.pingstteknik.propresenter.stagedisplayviewer.transition.CrossFadePane;
+import se.pingstteknik.propresenter.stagedisplayviewer.transition.FadePane;
+import se.pingstteknik.propresenter.stagedisplayviewer.transition.SequentialFadePane;
 import se.pingstteknik.propresenter.stagedisplayviewer.util.FxUtils;
 import se.pingstteknik.propresenter.stagedisplayviewer.util.Logger;
 import se.pingstteknik.propresenter.stagedisplayviewer.util.LoggerFactory;
@@ -39,7 +41,11 @@ public class Main extends Application {
 
         Property.loadProperties();
 
-        Text lowerKey = fxUtils.createLowerKey();
+        // Select the fade animation type.
+        FadePane lowerKey = "Sequential".equalsIgnoreCase(Property.FADE_TYPE.toString()) ?
+        		new SequentialFadePane(fxUtils.createLowerKey(), Property.FADE_TIME.toInt()) :
+        		new CrossFadePane(fxUtils.createLowerKey(), fxUtils.createLowerKey(), Property.FADE_TIME.toInt());
+
         midiModule = new MidiModule();
         lowerKeyHandler = new LowerKeyHandler(lowerKey, midiModule);
         thread = new Thread(lowerKeyHandler);

@@ -11,6 +11,7 @@ import java.io.File;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.GridPane;
@@ -79,7 +80,7 @@ public class FxUtils {
 	    	}
     }
 
-    public Scene createScene(Text lowerKey) {
+    public Scene createScene(Node lowerKey) {
         Rectangle2D bounds = getScreenBounds();
         Scene scene = new Scene(createRoot(lowerKey), bounds.getWidth(), bounds.getHeight());
         scene.getStylesheets().add("styles.css");
@@ -118,7 +119,7 @@ public class FxUtils {
         return 0.01 * (double) OUTPUT_WIDTH_PERCENTAGE.toInt();
     }
 
-    private GridPane createRoot(Text lowerKey) {
+    private GridPane createRoot(Node lowerKey) {
         GridPane root = new GridPane();
         root.setHgap(10);
         root.setVgap(10);

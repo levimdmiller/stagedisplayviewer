@@ -32,6 +32,7 @@ public enum Property {
     MIDI("false"),
     REMOVE_LINES_AFTER_EMPTY_LINE("false"),
 	FADE_TIME("0"), // Length of fade transition in milliseconds.
+	FADE_TYPE("cross"), // Type of transition, Should be one of (Case insensitive): Cross or Sequential.
 	CAPITALIZE_LINES("false"), // true if first word in every line should be capitalized.
 	CAPS_LOCK("false"), // true if lines should be all caps.
 	TEXT_ALIGN("justify"), // Specifies the text alignment. Should be one of (Case insensitive): Center, Right, Left, or Justify.
