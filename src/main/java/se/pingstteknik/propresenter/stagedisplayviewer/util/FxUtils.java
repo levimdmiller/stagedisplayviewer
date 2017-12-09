@@ -46,17 +46,37 @@ public class FxUtils {
      * @return
      */
     private TextAlignment getAlignment() {
-    	try {
-    		return TextAlignment.valueOf(Property.TEXT_ALIGN.toString().toUpperCase());
-    	} catch(IllegalArgumentException e) {
-    		log.warn(String.format(
-				"Invalid TEXT_ALIGN property: %s. It should be one of (Case insensitive): Center, Right, Left, or Justify.",
-				Property.TEXT_ALIGN.toString()
-				), e
-			);
-    		// Default to center align.
-    		return TextAlignment.CENTER;
-    	}
+	    	try {
+	    		return TextAlignment.valueOf(Property.TEXT_ALIGN.toString().toUpperCase());
+	    	} catch(IllegalArgumentException e) {
+	    		log.warn(String.format(
+					"Invalid TEXT_ALIGN property: %s. It should be one of (Case insensitive): Center, Right, Left, or Justify.",
+					Property.TEXT_ALIGN.toString()
+					), e
+				);
+	    		// Default to center align.
+	    		return TextAlignment.CENTER;
+	    	}
+    }
+    
+    /**
+     * Converts the String property VerticalAlignment to the appropriate VerticalAlignment.
+     * @return
+     */
+    private Pos getVerticalAlignment() {
+	    	try {
+	    		String key = Property.VERTICAL_ALIGN.toString().toUpperCase();
+	    		key = "CENTER".equals(key) ? key : key + "_CENTER";
+	    		return Pos.valueOf(key);
+	    	} catch(IllegalArgumentException e) {
+	    		log.warn(String.format(
+					"Invalid VERTICAL_ALIGN property: %s. It should be one of (Case insensitive): Center, Right, Left, or Justify.",
+					Property.VERTICAL_ALIGN.toString()
+					), e
+				);
+	    		// Default to center align.
+	    		return Pos.BOTTOM_CENTER;
+	    	}
     }
 
     public Scene createScene(Text lowerKey) {
@@ -102,7 +122,7 @@ public class FxUtils {
         GridPane root = new GridPane();
         root.setHgap(10);
         root.setVgap(10);
-        root.setAlignment(Pos.BOTTOM_CENTER);
+        root.setAlignment(getVerticalAlignment());
         root.setPadding(new Insets(10, 10, MARGIN_BOTTOM.toInt(), 10));
         root.add(lowerKey, 0, 0, 2, 1);
         return root;

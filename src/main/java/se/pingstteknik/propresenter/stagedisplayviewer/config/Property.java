@@ -35,6 +35,7 @@ public enum Property {
 	CAPITALIZE_LINES("false"), // true if first word in every line should be capitalized.
 	CAPS_LOCK("false"), // true if lines should be all caps.
 	TEXT_ALIGN("justify"), // Specifies the text alignment. Should be one of (Case insensitive): Center, Right, Left, or Justify.
+	VERTICAL_ALIGN("bottom"), // Specifies vertical alignment. Should be one of (Case insensitive): Bottom, Center, or Top.
 	HEIGHT("-1"), // Height of display
 	WIDTH("-1"); // Width of display (-1 if default)
 	
