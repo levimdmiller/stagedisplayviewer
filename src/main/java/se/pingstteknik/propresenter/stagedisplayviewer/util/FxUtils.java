@@ -5,6 +5,7 @@ import static se.pingstteknik.propresenter.stagedisplayviewer.config.Property.MA
 import static se.pingstteknik.propresenter.stagedisplayviewer.config.Property.MAX_FONT_SIZE;
 import static se.pingstteknik.propresenter.stagedisplayviewer.config.Property.OUTPUT_SCREEN;
 import static se.pingstteknik.propresenter.stagedisplayviewer.config.Property.OUTPUT_WIDTH_PERCENTAGE;
+import static se.pingstteknik.propresenter.stagedisplayviewer.config.Property.TEXT_SHADOW_SPREAD;
 
 import java.io.File;
 
@@ -13,6 +14,7 @@ import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -33,11 +35,13 @@ public class FxUtils {
         lowerKey.setFill(Color.WHITE);
         lowerKey.setWrappingWidth(getWrappingWidth());
         lowerKey.setTextAlignment(getAlignment());
+        lowerKey.getStyleClass().add("display-text");
         DropShadow ds = new DropShadow();
         ds.setOffsetY(0.0);
         ds.setOffsetX(0.0);
         ds.setColor(Color.BLACK);
-        ds.setSpread(0.5);
+        ds.setSpread(TEXT_SHADOW_SPREAD.toDouble());
+        ds.setBlurType(BlurType.GAUSSIAN);
         lowerKey.setEffect(ds);
         return lowerKey;
     }
