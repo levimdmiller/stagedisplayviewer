@@ -82,6 +82,9 @@ The 0 indicates the channel, 60 indicates the note Middle C and the 92 is an arb
 
 # [Releases](https://github.com/danielkihlgren/stagedisplayviewer/releases)
 
+[v1.7.0](https://github.com/levimdmiller/stagedisplayviewer/releases/tag/v1.7.0) [download](https://github.com/levimdmiller/stagedisplayviewer/releases/download/v1.7.0/StageDisplayViewer-v1.7.0.zip)
+Fixed Issues #16: Enhancements Request
+
 [v1.6.0](https://github.com/levimdmiller/stagedisplayviewer/releases/tag/v1.6.0) [download](https://github.com/levimdmiller/stagedisplayviewer/releases/download/v1.6.0/StageDisplayViewer-v1.6.0.zip)
 Fixed Issues #15: Enhancements Request
 
