@@ -81,6 +81,8 @@ Where
 The 0 indicates the channel, 60 indicates the note Middle C and the 92 is an arbitrary key-down velocity value
 
 # [Releases](https://github.com/danielkihlgren/stagedisplayviewer/releases)
+[v1.7.2](https://github.com/levimdmiller/stagedisplayviewer/releases/tag/v1.7.2) [download](https://github.com/levimdmiller/stagedisplayviewer/releases/download/v1.7.2/StageDisplayViewer-v1.7.2.zip)
+Each line is now trimmed of whitespace
 
 [v1.7.1](https://github.com/levimdmiller/stagedisplayviewer/releases/tag/v1.7.1) [download](https://github.com/levimdmiller/stagedisplayviewer/releases/download/v1.7.1/StageDisplayViewer-v1.7.1.zip)
 Text Shadow is now configurable
